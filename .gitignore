@@ -1,2 +1,4 @@
 __pycache__/
 venv/
+.vscode/
+sql_app/quotesDB.db

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.responses import Response
+from fastapi.middleware.cors import CORSMiddleware
 from sql_app import schemas, crud, database
 from sqlalchemy.orm import Session
 
@@ -7,6 +8,11 @@ from typing import Set, List
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_methods=['GET']
+)
 
 @app.get('/randomQuote', response_model = schemas.Quote)
 def get_random_quote(db: Session = Depends(database.get_db)):
